@@ -2,34 +2,482 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Iniciar sesión - Microsoft</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alerta: Simulacro de Phishing — Manijauto</title>
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Segoe UI',sans-serif; background:#f3f2f1; display:flex; justify-content:center; align-items:center; min-height:100vh; }
-    .card { background:white; padding:44px; width:440px; border-radius:2px; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
-    img { margin-bottom:16px; }
-    h1 { font-size:24px; font-weight:600; margin-bottom:24px; color:#1b1b1b; }
-    input[type=email], input[type=password] { width:100%; border:1px solid #666; padding:6px 10px; font-size:15px; height:36px; margin-bottom:16px; outline:none; display:block; }
-    input[type=email]:focus, input[type=password]:focus { border-color:#0078d4; border-width:2px; }
-    input[type=submit] { background:#0078d4; color:white; border:none; padding:0 16px; height:36px; font-size:15px; cursor:pointer; width:100%; }
-    input[type=submit]:hover { background:#106ebe; }
-    .links { margin-top:16px; font-size:13px; }
-    .links a { color:#0078d4; text-decoration:none; display:block; margin-bottom:8px; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    /* TOP BANNER */
+    .top-banner {
+      background: #c0392b;
+      color: white;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* HEADER */
+    .header {
+      background: #1a1a2e;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-size: 22px; font-weight: 800; color: white; letter-spacing: 1px; }
+    .logo span { color: #e74c3c; }
+    .header-badge {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.5px;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #c0392b 100%);
+      padding: 50px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '🛡️';
+      position: absolute;
+      font-size: 200px;
+      opacity: 0.05;
+      top: -20px;
+      right: -20px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero-title span { color: #f9ca24; }
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ALERT BOX */
+    .alert-section {
+      max-width: 780px;
+      margin: -30px auto 0;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+    .alert-box {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      padding: 24px 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      border-left: 5px solid #27ae60;
+    }
+    .alert-icon-big { font-size: 36px; flex-shrink: 0; }
+    .alert-box-title { font-size: 17px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+    .alert-box-text { font-size: 14px; color: #555; line-height: 1.7; }
+    .alert-box-text strong { color: #c0392b; }
+
+    /* MAIN CONTENT */
+    .main { max-width: 780px; margin: 30px auto; padding: 0 20px 40px; }
+
+    /* SECTION */
+    .section { margin-bottom: 32px; }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e5e5e5;
+    }
+
+    /* CARD GRID */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .tip-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-top: 3px solid #c0392b;
+      transition: transform .2s;
+    }
+    .tip-card:hover { transform: translateY(-3px); }
+    .tip-card-icon { font-size: 28px; margin-bottom: 10px; }
+    .tip-card-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+    .tip-card-text { font-size: 13px; color: #666; line-height: 1.6; }
+
+    /* ANATOMY */
+    .anatomy-box {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .anatomy-header {
+      background: #1a1a2e;
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #aaa;
+      letter-spacing: 0.5px;
+    }
+    .anatomy-email {
+      padding: 20px;
+      font-size: 13px;
+      color: #333;
+      line-height: 1.7;
+    }
+    .anatomy-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 6px;
+      align-items: flex-start;
+    }
+    .anatomy-label {
+      min-width: 80px;
+      color: #888;
+      font-size: 12px;
+      padding-top: 1px;
+    }
+    .anatomy-val { color: #1a1a2e; }
+    .anatomy-flag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fdecea;
+      color: #c0392b;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+    .anatomy-body {
+      border-top: 1px solid #f0f0f0;
+      padding-top: 14px;
+      margin-top: 10px;
+    }
+    .anatomy-highlight {
+      background: #fdecea;
+      border-left: 3px solid #c0392b;
+      padding: 10px 14px;
+      border-radius: 0 4px 4px 0;
+      margin: 10px 0;
+      font-size: 13px;
+      color: #555;
+    }
+    .anatomy-highlight strong { color: #c0392b; }
+
+    /* STEPS */
+    .steps-box {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 24px;
+    }
+    .step-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+      align-items: flex-start;
+    }
+    .step-item:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: #c0392b;
+      color: white;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .step-content-text { font-size: 13px; color: #666; line-height: 1.6; }
+
+    /* REPORT BOX */
+    .report-box {
+      background: #eafaf1;
+      border: 1px solid #a9dfbf;
+      border-radius: 8px;
+      padding: 22px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .report-icon { font-size: 32px; flex-shrink: 0; }
+    .report-title { font-size: 15px; font-weight: 700; color: #1e8449; margin-bottom: 6px; }
+    .report-text { font-size: 13px; color: #2e7d32; line-height: 1.7; }
+    .report-email {
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+
+    /* STATS */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+    .stat-card {
+      background: white;
+      border-radius: 8px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .stat-num { font-size: 30px; font-weight: 800; color: #c0392b; }
+    .stat-label { font-size: 12px; color: #888; margin-top: 4px; line-height: 1.4; }
+
+    /* FOOTER */
+    .footer {
+      background: #1a1a2e;
+      padding: 24px 40px;
+      text-align: center;
+    }
+    .footer-logo { font-size: 16px; font-weight: 700; color: white; margin-bottom: 6px; }
+    .footer-logo span { color: #e74c3c; }
+    .footer-text { font-size: 12px; color: #666; line-height: 1.6; }
+
+    @media (max-width: 600px) {
+      .header { padding: 16px 20px; }
+      .hero { padding: 40px 20px; }
+      .hero-title { font-size: 24px; }
+      .alert-box { flex-direction: column; }
+      .main { padding: 0 14px 30px; }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/120px-Microsoft_logo.svg.png" width="108" alt="Microsoft">
-    <h1>Iniciar sesión</h1>
-<form onsubmit="window.location.href='https://mrfredby.github.io/seguridad-manijauto'; return false;">
-  <input type="email" name="email" placeholder="Correo electrónico" required>
-  <input type="password" name="password" placeholder="Contraseña" required>
-  <input type="submit" value="Siguiente">
-</form>
-    <div class="links">
-      <a href="#">¿No tienes cuenta? Créala</a>
-      <a href="#">¿No puedes acceder a tu cuenta?</a>
+
+  <div class="top-banner">
+    ⚠️ SIMULACRO INTERNO DE PHISHING — Programa de Concientización en Seguridad 2026
+  </div>
+
+  <div class="header">
+    <div class="logo">MANJI<span>AUTO</span></div>
+    <div class="header-badge">Departamento de Sistemas TI</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">🛡️ Seguridad Informática</div>
+    <div class="hero-title">Acabas de caer en un<br><span>correo de phishing</span></div>
+    <div class="hero-sub">No te preocupes — esto fue una prueba interna. Ningún dato tuyo fue capturado. Tómate 3 minutos para aprender a protegerte.</div>
+  </div>
+
+  <!-- ALERT BOX -->
+  <div class="alert-section">
+    <div class="alert-box">
+      <div class="alert-icon-big">✅</div>
+      <div>
+        <div class="alert-box-title">Tus datos están seguros</div>
+        <div class="alert-box-text">
+          Este correo fue enviado por el área de <strong>Sistemas TI de Manijauto</strong> como parte de un programa autorizado de concientización en ciberseguridad. <strong>No se guardó ninguna contraseña ni información personal.</strong> El objetivo es ayudarte a identificar ataques reales antes de que ocurran.
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- STATS -->
+    <div class="section" style="margin-top: 32px;">
+      <div class="section-title">El phishing en números</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">91%</div>
+          <div class="stat-label">de los ciberataques comienzan con un correo de phishing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3.4B</div>
+          <div class="stat-label">correos de phishing se envían cada día en el mundo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$17K</div>
+          <div class="stat-label">pérdida promedio por minuto por ataques de phishing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">30s</div>
+          <div class="stat-label">es lo que tarda un atacante en robar tus credenciales</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÑALES -->
+    <div class="section">
+      <div class="section-title">4 señales de un correo phishing</div>
+      <div class="card-grid">
+        <div class="tip-card">
+          <div class="tip-card-icon">📧</div>
+          <div class="tip-card-title">Remitente sospechoso</div>
+          <div class="tip-card-text">El correo viene de un dominio diferente al oficial. Revisa siempre la dirección completa, no solo el nombre.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">⏰</div>
+          <div class="tip-card-title">Urgencia artificial</div>
+          <div class="tip-card-text">"Tu cuenta expira en 4 horas" — los atacantes crean presión para que actúes sin pensar.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">🔗</div>
+          <div class="tip-card-title">Enlace engañoso</div>
+          <div class="tip-card-text">Pasa el cursor sobre el botón sin hacer clic. Si la URL no es del dominio oficial de tu empresa, es falso.</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card-icon">🔑</div>
+          <div class="tip-card-title">Pide credenciales</div>
+          <div class="tip-card-text">Ningún área de TI legítima te pedirá tu contraseña por correo o en una página externa.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANATOMÍA DEL CORREO -->
+    <div class="section">
+      <div class="section-title">Anatomía del correo que recibiste</div>
+      <div class="anatomy-box">
+        <div class="anatomy-header">CORREO DE SIMULACRO — Así debiste haberlo identificado</div>
+        <div class="anatomy-email">
+          <div class="anatomy-row">
+            <span class="anatomy-label">De:</span>
+            <span class="anatomy-val">Soporte IT &lt;fredyomarhernandezalba@gmail.com&gt;
+              <span class="anatomy-flag">⚠️ Gmail, no dominio corporativo</span>
+            </span>
+          </div>
+          <div class="anatomy-row">
+            <span class="anatomy-label">Asunto:</span>
+            <span class="anatomy-val">[Urgente] Alerta de seguridad — Acción requerida
+              <span class="anatomy-flag">⚠️ Urgencia forzada</span>
+            </span>
+          </div>
+          <div class="anatomy-body">
+            <div class="anatomy-highlight">
+              <strong>🚩 "Tienes 4 horas para completar la verificación"</strong><br>
+              Táctica clásica: crear presión de tiempo para que no pienses con calma.
+            </div>
+            <div class="anatomy-highlight">
+              <strong>🚩 Botón "VERIFICAR MI CUENTA AHORA"</strong><br>
+              El enlace llevaba a una página falsa, no al sistema real de Manijauto.
+            </div>
+            <div class="anatomy-highlight">
+              <strong>🚩 Pedía usuario y contraseña corporativa</strong><br>
+              TI nunca solicita tus credenciales por correo ni en páginas externas.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUÉ HACER -->
+    <div class="section">
+      <div class="section-title">¿Qué hacer la próxima vez?</div>
+      <div class="steps-box">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-content-title">Para y respira</div>
+            <div class="step-content-text">Si un correo te genera urgencia o miedo, es una señal de alerta. Los atacantes usan las emociones para que actúes sin pensar.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-content-title">Verifica el remitente completo</div>
+            <div class="step-content-text">Haz clic en el nombre del remitente para ver la dirección real. Si no termina en @manijauto.com o @manijaut.com.mx, es sospechoso.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-content-title">No hagas clic — verifica por otro medio</div>
+            <div class="step-content-text">Si el correo parece de TI, llama directamente al área o escribe a soporte por el canal oficial. Nunca uses los datos del correo sospechoso.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div>
+            <div class="step-content-title">Repórtalo inmediatamente</div>
+            <div class="step-content-text">Reenvía el correo sospechoso al área de TI. Tu reporte puede proteger a todos tus compañeros de un ataque real.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPORTAR -->
+    <div class="section">
+      <div class="report-box">
+        <div class="report-icon">📢</div>
+        <div>
+          <div class="report-title">¿Recibiste un correo sospechoso real?</div>
+          <div class="report-text">
+            No lo borres. No hagas clic en ningún enlace. Repórtalo de inmediato al área de Sistemas TI de Manijauto. Tu alerta puede prevenir un ataque a toda la empresa.
+          </div>
+          <a class="report-email" href="mailto:soporte@manijauto.com">📧 Reportar a soporte@manijauto.com</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">MANJI<span>AUTO</span></div>
+    <div class="footer-text">
+      Simulacro interno autorizado por Dirección General · Departamento de Sistemas TI · Mayo 2026<br>
+      Este programa tiene como único objetivo proteger a los colaboradores y a la empresa de ataques reales.
+    </div>
+  </div>
+
 </body>
 </html>
